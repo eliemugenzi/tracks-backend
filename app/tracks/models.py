@@ -12,3 +12,8 @@ class Track(models.Model):
   
   def __str__(self):
     return self.title
+
+class Like(models.Model):
+  user = models.ForeignKey(get_user_model(), null=True, on_delete=models.CASCADE)
+  track = models.ForeignKey('tracks.Track', related_name='likes',on_delete=models.CASCADE)
+  
