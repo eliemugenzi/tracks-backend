@@ -1,25 +1,39 @@
 import React from 'react';
+import { Query } from 'react-apollo';
+import { gql } from 'apollo-boost';
 import logo from './logo.svg';
 import './App.css';
 
+const GET_TRACKS_QUERY = gql`
+ {
+   tracks {
+     title
+     description
+     url
+   }
+ }
+`;
+
+const ME_QUERY = gql`
+{
+  me{
+    id
+    username
+    email
+  }
+}
+`;
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Query query={ME_QUERY}>
+      {({ data, loading, error }) => {
+        if (loading) return <div>Loading...</div>
+        if (error) return <div>Error</div>
+        return <div>
+          {JSON.stringify(data)}
+        </div>
+      }}
+    </Query>
   );
 }
 
