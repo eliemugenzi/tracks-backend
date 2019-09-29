@@ -36,7 +36,7 @@ const TrackList = ({tracks}) => {
                   textDecoration: 'none',
                   color:'#333'
                 }}>
-                  By {track.postedBy.username}
+                  Uploaded by <i style={{ color:'#3B81E5'}}>{track.postedBy.username}</i>
                 </Link>
               }
               primaryTypographyProps={{
@@ -53,8 +53,8 @@ const TrackList = ({tracks}) => {
             </Typography>
           </ExpansionPanelDetails>
           <ExpansionPanelActions>
-            <UpdateTrack />
-            <DeleteTrack />
+            <UpdateTrack track={track} />
+            <DeleteTrack track={track} />
           </ExpansionPanelActions>
         </ExpansionPanel>
       ))}
