@@ -24,7 +24,7 @@ const TrackList = ({tracks}) => {
         }}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <ListItem>
-            <LikeTrack />
+            <LikeTrack trackId={track.id} likeCount={track.likes.length} />
             <ListItemText
                 primary={track.title}
                 style={{

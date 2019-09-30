@@ -22,12 +22,18 @@ const GET_TRACKS_QUERY = gql`
  }
 `;
 
-const ME_QUERY = gql`
+export const ME_QUERY = gql`
 {
   me{
     id
     username
     email
+    likeSet{
+      track{
+        id
+        title
+      }
+    }
   }
 }
 `;
