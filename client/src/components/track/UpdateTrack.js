@@ -111,9 +111,9 @@ const UpdateTrack = ({ track }) => {
           setDescription('');
           setFile('');
         }}
-        refetchQueries={() => [{
-          query: GET_TRACKS_QUERY
-        }]}
+        // refetchQueries={() => [{
+        //   query: GET_TRACKS_QUERY
+        // }]}
       >
         {(updateTrack, { loading, error }) => {
           if (error) return <Error error={error} />;
