@@ -26,6 +26,14 @@ const CREATE_TRACK_MUTATION = gql`
          id
          title
          description
+         url
+         likes{
+           id
+         }
+         postedBy{
+           id
+           username
+         }
        }
      }
    }
@@ -80,6 +88,19 @@ const CreateTrack = () => {
     });
   }
 
+  const handleUpdateCache = (cache, {data:{createTrack}}) => {
+    const data=cache.readQuery({
+      query:GET_TRACKS_QUERY
+    });
+    const tracks=data.tracks.concat(createTrack.track);
+    cache.writeQuery({
+      query: GET_TRACKS_QUERY,
+      data: {
+        tracks
+      }
+    });
+  }
+
   return (
     <div>
       {/* Create Track Button */}
@@ -114,9 +135,10 @@ const CreateTrack = () => {
           setDescription('');
           setFile('');
         }}
-        refetchQueries={() => [{
-          query:GET_TRACKS_QUERY
-        }]}
+        update={handleUpdateCache}
+        // refetchQueries={() => [{
+        //   query:GET_TRACKS_QUERY
+        // }]}
       >
         {(createTrack, { loading, error }) => {
           if (error) return <Error error={error} />;
